@@ -5,21 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Name - ePortfolio</title>
     <style>
+        /* Gruvbox colors */
+        :root {
+            --bg0: #282828;         /* Dark background */
+            --bg1: #3c3836;         /* Lighter background */
+            --fg: #ebdbb2;          /* Main text color */
+            --fg2: #d5c4a1;         /* Secondary text */
+            --orange: #fe8019;      /* Accent color */
+            --green: #b8bb26;       /* Secondary accent */
+        }
+
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 20px;
+            background-color: var(--bg0);
+            color: var(--fg);
         }
+
         .container {
             max-width: 800px;
             margin: 0 auto;
+            background-color: var(--bg1);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
         }
-        h1, h2 {
-            color: #333;
+
+        h1 {
+            color: var(--orange);
+            border-bottom: 2px solid var(--orange);
+            padding-bottom: 10px;
         }
+
+        h2 {
+            color: var(--green);
+        }
+
         .section {
             margin-bottom: 30px;
+            padding: 20px;
+            background-color: var(--bg0);
+            border-radius: 5px;
+        }
+
+        a {
+            color: var(--orange);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
