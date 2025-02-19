@@ -1,84 +1,131 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - ePortfolio</title>
-    <style>
-        /* Gruvbox colors */
-        :root {
-            --bg0: #282828;         /* Dark background */
-            --bg1: #3c3836;         /* Lighter background */
-            --fg: #ebdbb2;          /* Main text color */
-            --fg2: #d5c4a1;         /* Secondary text */
-            --orange: #fe8019;      /* Accent color */
-            --green: #b8bb26;       /* Secondary accent */
-        }
+import React, { useState } from 'react';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            background-color: var(--bg0);
-            color: var(--fg);
-        }
+const EPortfolio = () => {
+  const [expandedSections, setExpandedSections] = useState({});
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: var(--bg1);
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
-        }
+  const toggleSection = (section) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
+  };
 
-        h1 {
-            color: var(--orange);
-            border-bottom: 2px solid var(--orange);
-            padding-bottom: 10px;
-        }
-
-        h2 {
-            color: var(--green);
-        }
-
-        .section {
-            margin-bottom: 30px;
-            padding: 20px;
-            background-color: var(--bg0);
-            border-radius: 5px;
-        }
-
-        a {
-            color: var(--orange);
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Kayla Cromer</h1>
-        <h2>Computer Science Portfolio</h2>
-        
-        <div class="section">
-            <h2>Software Design and Engineering</h2>
-            <p>[Project descriptions will go here]</p>
+  const Section = ({ title, children, id }) => (
+    <Card className="mb-4 bg-stone-900 border-amber-700">
+      <CardHeader className="cursor-pointer border-b border-amber-700" onClick={() => toggleSection(id)}>
+        <div className="flex items-center justify-between">
+          <CardTitle className="text-xl text-amber-300">{title}</CardTitle>
+          {expandedSections[id] ? (
+            <ChevronUp className="text-amber-300" />
+          ) : (
+            <ChevronDown className="text-amber-300" />
+          )}
         </div>
+      </CardHeader>
+      {expandedSections[id] && (
+        <CardContent className="text-amber-100">
+          {children}
+        </CardContent>
+      )}
+    </Card>
+  );
 
-        <div class="section">
-            <h2>Algorithms and Data Structures</h2>
-            <p>[Project descriptions will go here]</p>
+  return (
+    <div className="max-w-4xl mx-auto p-6 bg-stone-950 min-h-screen">
+      <h1 className="text-3xl font-bold mb-8 text-center text-amber-200">
+        Computer Science ePortfolio
+      </h1>
+      
+      <Section id="professional-assessment" title="Professional Self-Assessment">
+        <div className="space-y-4">
+          <p className="text-lg text-amber-100">
+            [Your comprehensive self-assessment goes here. Include:]
+          </p>
+          <ul className="list-disc pl-6 space-y-2 text-amber-100">
+            <li>Your professional goals and journey in computer science</li>
+            <li>Key strengths and skills developed throughout the program</li>
+            <li>How your artifacts demonstrate your capabilities</li>
+            <li>Your growth in collaboration and security mindset</li>
+          </ul>
         </div>
+      </Section>
 
-        <div class="section">
-            <h2>Databases</h2>
-            <p>[Project descriptions will go here]</p>
+      <Section id="code-review" title="Code Review">
+        <div className="space-y-4">
+          <div className="flex items-center space-x-2">
+            <a href="#" className="text-green-400 hover:text-green-300 hover:underline">
+              View Code Review Video
+            </a>
+          </div>
+          <p className="text-amber-100">
+            A thorough review analyzing code structure, security, functionality, and potential improvements.
+          </p>
         </div>
+      </Section>
+
+      <Tabs defaultValue="algorithms" className="mt-6">
+        <TabsList className="grid w-full grid-cols-3 bg-stone-800">
+          <TabsTrigger 
+            value="algorithms"
+            className="data-[state=active]:bg-stone-900 data-[state=active]:text-amber-300 text-amber-100"
+          >
+            Algorithms
+          </TabsTrigger>
+          <TabsTrigger 
+            value="software-design"
+            className="data-[state=active]:bg-stone-900 data-[state=active]:text-amber-300 text-amber-100"
+          >
+            Software Design
+          </TabsTrigger>
+          <TabsTrigger 
+            value="databases"
+            className="data-[state=active]:bg-stone-900 data-[state=active]:text-amber-300 text-amber-100"
+          >
+            Databases
+          </TabsTrigger>
+        </TabsList>
+
+        {['algorithms', 'software-design', 'databases'].map((category) => (
+          <TabsContent key={category} value={category} className="space-y-4">
+            <Card className="bg-stone-900 border-amber-700">
+              <CardHeader>
+                <CardTitle className="text-amber-300">
+                  {category.split('-').map(word => 
+                    word.charAt(0).toUpperCase() + word.slice(1)
+                  ).join(' ')} Enhancement
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <h3 className="font-semibold mb-2 text-amber-200">Original Artifact</h3>
+                    <a href="#" className="text-green-400 hover:text-green-300 hover:underline">
+                      View Original Code
+                    </a>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-2 text-amber-200">Enhanced Version</h3>
+                    <a href="#" className="text-green-400 hover:text-green-300 hover:underline">
+                      View Enhanced Code
+                    </a>
+                  </div>
+                </div>
+                <div className="mt-4">
+                  <h3 className="font-semibold mb-2 text-amber-200">Narrative</h3>
+                  <p className="text-amber-100">
+                    [Your narrative explaining the enhancements, skills demonstrated, and alignment with course outcomes]
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        ))}
+      </Tabs>
     </div>
-</body>
-</html>
+  );
+};
+
+export default EPortfolio;
