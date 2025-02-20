@@ -6,8 +6,8 @@
     <title>CS 499 ePortfolio</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
     <style>
-        /* Keep your existing Gruvbox color variables and base styles */
         :root {
+            /* Gruvbox Dark Colors */
             --bg0-hard: #1d2021;
             --bg0: #282828;
             --bg1: #3c3836;
@@ -21,8 +21,142 @@
             --dark-aqua: #689d6a;
         }
 
-        /* Keep all your existing styles */
-        /* Add these new styles for markdown content */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: var(--bg0-hard);
+            color: var(--fg1);
+            line-height: 1.6;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: var(--fg0);
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+
+        .section {
+            background-color: var(--bg0);
+            border: 1px solid var(--bg3);
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .section-header {
+            background-color: var(--bg1);
+            padding: 1rem;
+            cursor: pointer;
+            border-bottom: 1px solid var(--bg3);
+        }
+
+        .section-header h2 {
+            color: var(--fg0);
+            font-size: 1.25rem;
+        }
+
+        .section-content {
+            padding: 1.5rem;
+        }
+
+        .section-content ul {
+            list-style-position: inside;
+            margin: 1rem 0;
+        }
+
+        .section-content li {
+            color: var(--fg2);
+            margin: 0.5rem 0;
+            padding-left: 1rem;
+        }
+
+        .tabs {
+            margin-top: 2rem;
+        }
+
+        .tab-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4px;
+            background-color: var(--bg1);
+            padding: 4px;
+            border-radius: 4px;
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            padding: 0.75rem;
+            color: var(--fg2);
+            cursor: pointer;
+            transition: background-color 0.2s;
+            border-radius: 2px;
+        }
+
+        .tab-button:hover {
+            background-color: var(--bg0);
+            color: var(--fg0);
+        }
+
+        .tab-button.active {
+            background-color: var(--bg0);
+            color: var(--fg0);
+        }
+
+        .tab-content {
+            display: none;
+            padding: 1.5rem;
+            background-color: var(--bg0);
+            border: 1px solid var(--bg3);
+            border-radius: 4px;
+            margin-top: 0.5rem;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .artifact-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .artifact-section h3 {
+            color: var(--fg0);
+            margin-bottom: 0.75rem;
+        }
+
+        a {
+            color: var(--aqua);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: var(--dark-aqua);
+            text-decoration: underline;
+        }
+
+        .narrative {
+            border-top: 1px solid var(--bg3);
+            padding-top: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
         .narrative-content {
             padding: 1rem;
             color: var(--fg1);
@@ -51,15 +185,21 @@
             font-style: italic;
         }
 
-        /* Keep all your existing styles after this */
+        @media (max-width: 768px) {
+            .artifact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            body {
+                padding: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Keep your existing header and structure -->
     <div class="container">
         <h1>Computer Science ePortfolio</h1>
 
-        <!-- Professional Self-Assessment Section -->
         <div class="section">
             <div class="section-header">
                 <h2>Professional Self-Assessment</h2>
@@ -71,20 +211,18 @@
             </div>
         </div>
 
-        <!-- Code Review Section -->
         <div class="section">
             <div class="section-header">
                 <h2>Code Review</h2>
             </div>
             <div class="section-content">
-                <a href="YOUR_VIDEO_LINK_HERE">View Code Review Video</a>
+                <a href="#">View Code Review Video</a>
                 <div id="code-review-content" class="narrative-content">
                     <p class="load-status">Loading code review description...</p>
                 </div>
             </div>
         </div>
 
-        <!-- Artifacts Tabs -->
         <div class="tabs">
             <div class="tab-buttons">
                 <button class="tab-button active" onclick="openTab(event, 'algorithms')">Algorithms</button>
@@ -92,7 +230,6 @@
                 <button class="tab-button" onclick="openTab(event, 'databases')">Databases</button>
             </div>
 
-            <!-- Algorithms Tab -->
             <div id="algorithms" class="tab-content active">
                 <div class="artifact-grid">
                     <div class="artifact-section">
@@ -112,7 +249,6 @@
                 </div>
             </div>
 
-            <!-- Software Design Tab -->
             <div id="software-design" class="tab-content">
                 <div class="artifact-grid">
                     <div class="artifact-section">
@@ -132,16 +268,15 @@
                 </div>
             </div>
 
-            <!-- Databases Tab -->
             <div id="databases" class="tab-content">
                 <div class="artifact-grid">
                     <div class="artifact-section">
                         <h3>Original Artifact</h3>
-                        <a href="YOUR_DATABASES_ORIGINAL_LINK">View Original Code</a>
+                        <a href="#">View Original Code</a>
                     </div>
                     <div class="artifact-section">
                         <h3>Enhanced Version</h3>
-                        <a href="YOUR_DATABASES_ENHANCED_LINK">View Enhanced Code</a>
+                        <a href="#">View Enhanced Code</a>
                     </div>
                 </div>
                 <div class="narrative">
@@ -169,7 +304,6 @@
             }
         }
 
-        // Modified openTab function
         function openTab(evt, tabName) {
             let tabcontents = document.getElementsByClassName("tab-content");
             for (let i = 0; i < tabcontents.length; i++) {
