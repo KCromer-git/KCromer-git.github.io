@@ -69,6 +69,11 @@
 
         .section-content {
             padding: 1.5rem;
+            display: none;
+        }
+
+        .section-content.active {
+            display: block;
         }
 
         .section-content ul {
@@ -229,10 +234,10 @@
         <h1>Computer Science ePortfolio</h1>
 
         <div class="section">
-            <div class="section-header">
+            <div class="section-header" onclick="toggleSection('self-assessment')">
                 <h2>Professional Self-Assessment</h2>
             </div>
-            <div class="section-content">
+            <div id="self-assessment-section" class="section-content">
                 <div id="self-assessment-content" class="narrative-content">
                     <p class="load-status">Loading self-assessment...</p>
                 </div>
@@ -240,10 +245,10 @@
         </div>
 
         <div class="section">
-            <div class="section-header">
+            <div class="section-header" onclick="toggleSection('code-review')">
                 <h2>Code Review</h2>
             </div>
-            <div class="section-content">
+            <div id="code-review-section" class="section-content">
                 <a href="#">View Code Review Video</a>
                 <div id="code-review-content" class="narrative-content">
                     <p class="load-status">Loading code review description...</p>
@@ -318,10 +323,10 @@
     </div>
 
     <script>
-        // Function to load and render markdown content
         async function loadNarrative(filename, elementId) {
             try {
-                const response = await fetch(filename);
+                const response = await fetch(`narratives/${filename}.md`);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const text = await response.text();
                 const htmlContent = marked.parse(text);
                 document.getElementById(elementId).innerHTML = htmlContent;
@@ -329,6 +334,17 @@
                 console.error('Error loading narrative:', error);
                 document.getElementById(elementId).innerHTML = 
                     '<p class="load-status">Error loading content. Please try again later.</p>';
+            }
+        }
+
+        function toggleSection(sectionId) {
+            const section = document.getElementById(`${sectionId}-section`);
+            section.classList.toggle('active');
+            
+            // Load content if it hasn't been loaded yet
+            const contentElement = document.getElementById(`${sectionId}-content`);
+            if (contentElement.querySelector('.load-status')) {
+                loadNarrative(sectionId, `${sectionId}-content`);
             }
         }
 
@@ -350,23 +366,19 @@
             const narrativeId = `${tabName}-narrative`;
             const narrativeElement = document.getElementById(narrativeId);
             if (narrativeElement.querySelector('.load-status')) {
-                loadNarrative(`narratives/${tabName}.md`, narrativeId);
+                loadNarrative(tabName, narrativeId);
             }
         }
 
-        // Section toggle functionality
-        document.querySelectorAll('.section-header').forEach(header => {
-            header.addEventListener('click', () => {
-                const content = header.nextElementSibling;
-                content.style.display = content.style.display === 'none' ? 'block' : 'none';
-            });
-        });
-
         // Load initial content
         document.addEventListener('DOMContentLoaded', () => {
-            loadNarrative('narratives/self-assessment.md', 'self-assessment-content');
-            loadNarrative('narratives/code-review.md', 'code-review-content');
-            loadNarrative('narratives/algorithms.md', 'algorithms-narrative');
+            // Show first section by default
+            document.getElementById('self-assessment-section').classList.add('active');
+            
+            // Load initial content
+            loadNarrative('self-assessment', 'self-assessment-content');
+            loadNarrative('code-review', 'code-review-content');
+            loadNarrative('algorithms', 'algorithms-narrative');
         });
     </script>
 </body>
