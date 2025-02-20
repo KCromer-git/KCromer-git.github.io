@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CS 499 ePortfolio</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
     <style>
+        /* Keep your existing Gruvbox color variables and base styles */
         :root {
-            /* Gruvbox Dark Colors */
             --bg0-hard: #1d2021;
             --bg0: #282828;
             --bg1: #3c3836;
@@ -20,182 +21,70 @@
             --dark-aqua: #689d6a;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: system-ui, -apple-system, sans-serif;
-            background-color: var(--bg0-hard);
-            color: var(--fg1);
-            line-height: 1.6;
-            padding: 2rem;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            color: var(--fg0);
-            text-align: center;
-            margin-bottom: 2rem;
-            font-size: 2.5rem;
-        }
-
-        .section {
-            background-color: var(--bg0);
-            border: 1px solid var(--bg3);
-            border-radius: 4px;
-            margin-bottom: 1.5rem;
-            overflow: hidden;
-        }
-
-        .section-header {
-            background-color: var(--bg1);
+        /* Keep all your existing styles */
+        /* Add these new styles for markdown content */
+        .narrative-content {
             padding: 1rem;
-            cursor: pointer;
-            border-bottom: 1px solid var(--bg3);
+            color: var(--fg1);
         }
 
-        .section-header h2 {
+        .narrative-content h2, 
+        .narrative-content h3 {
             color: var(--fg0);
-            font-size: 1.25rem;
-        }
-
-        .section-content {
-            padding: 1.5rem;
-        }
-
-        .section-content ul {
-            list-style-position: inside;
             margin: 1rem 0;
         }
 
-        .section-content li {
+        .narrative-content p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .narrative-content ul, 
+        .narrative-content ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
             color: var(--fg2);
-            margin: 0.5rem 0;
-            padding-left: 1rem;
         }
 
-        .tabs {
-            margin-top: 2rem;
-        }
-
-        .tab-buttons {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 4px;
-            background-color: var(--bg1);
-            padding: 4px;
-            border-radius: 4px;
-        }
-
-        .tab-button {
-            background: none;
-            border: none;
-            padding: 0.75rem;
+        .load-status {
             color: var(--fg2);
-            cursor: pointer;
-            transition: background-color 0.2s;
-            border-radius: 2px;
+            font-style: italic;
         }
 
-        .tab-button:hover {
-            background-color: var(--bg0);
-            color: var(--fg0);
-        }
-
-        .tab-button.active {
-            background-color: var(--bg0);
-            color: var(--fg0);
-        }
-
-        .tab-content {
-            display: none;
-            padding: 1.5rem;
-            background-color: var(--bg0);
-            border: 1px solid var(--bg3);
-            border-radius: 4px;
-            margin-top: 0.5rem;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .artifact-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .artifact-section h3 {
-            color: var(--fg0);
-            margin-bottom: 0.75rem;
-        }
-
-        a {
-            color: var(--aqua);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        a:hover {
-            color: var(--dark-aqua);
-            text-decoration: underline;
-        }
-
-        .narrative {
-            border-top: 1px solid var(--bg3);
-            padding-top: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        @media (max-width: 768px) {
-            .artifact-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            body {
-                padding: 1rem;
-            }
-        }
+        /* Keep all your existing styles after this */
     </style>
 </head>
 <body>
+    <!-- Keep your existing header and structure -->
     <div class="container">
         <h1>Computer Science ePortfolio</h1>
 
+        <!-- Professional Self-Assessment Section -->
         <div class="section">
             <div class="section-header">
                 <h2>Professional Self-Assessment</h2>
             </div>
             <div class="section-content">
-                <p>[Your comprehensive self-assessment goes here. Include:]</p>
-                <ul>
-                    <li>Your professional goals and journey in computer science</li>
-                    <li>Key strengths and skills developed throughout the program</li>
-                    <li>How your artifacts demonstrate your capabilities</li>
-                    <li>Your growth in collaboration and security mindset</li>
-                </ul>
+                <div id="self-assessment-content" class="narrative-content">
+                    <p class="load-status">Loading self-assessment...</p>
+                </div>
             </div>
         </div>
 
+        <!-- Code Review Section -->
         <div class="section">
             <div class="section-header">
                 <h2>Code Review</h2>
             </div>
             <div class="section-content">
-                <a href="#">View Code Review Video</a>
-                <p>A thorough review analyzing code structure, security, functionality, and potential improvements.</p>
+                <a href="YOUR_VIDEO_LINK_HERE">View Code Review Video</a>
+                <div id="code-review-content" class="narrative-content">
+                    <p class="load-status">Loading code review description...</p>
+                </div>
             </div>
         </div>
 
+        <!-- Artifacts Tabs -->
         <div class="tabs">
             <div class="tab-buttons">
                 <button class="tab-button active" onclick="openTab(event, 'algorithms')">Algorithms</button>
@@ -203,23 +92,27 @@
                 <button class="tab-button" onclick="openTab(event, 'databases')">Databases</button>
             </div>
 
+            <!-- Algorithms Tab -->
             <div id="algorithms" class="tab-content active">
                 <div class="artifact-grid">
                     <div class="artifact-section">
                         <h3>Original Artifact</h3>
-                        <a href="#">View Original Code</a>
+                        <a href="YOUR_ALGORITHMS_ORIGINAL_LINK">View Original Code</a>
                     </div>
                     <div class="artifact-section">
                         <h3>Enhanced Version</h3>
-                        <a href="#">View Enhanced Code</a>
+                        <a href="YOUR_ALGORITHMS_ENHANCED_LINK">View Enhanced Code</a>
                     </div>
                 </div>
                 <div class="narrative">
                     <h3>Narrative</h3>
-                    <p>[Your narrative explaining the enhancements, skills demonstrated, and alignment with course outcomes]</p>
+                    <div id="algorithms-narrative" class="narrative-content">
+                        <p class="load-status">Loading algorithms narrative...</p>
+                    </div>
                 </div>
             </div>
 
+            <!-- Software Design Tab -->
             <div id="software-design" class="tab-content">
                 <div class="artifact-grid">
                     <div class="artifact-section">
@@ -233,30 +126,50 @@
                 </div>
                 <div class="narrative">
                     <h3>Narrative</h3>
-                    <p>[Your narrative explaining the enhancements, skills demonstrated, and alignment with course outcomes]</p>
+                    <div id="software-design-narrative" class="narrative-content">
+                        <p class="load-status">Loading software design narrative...</p>
+                    </div>
                 </div>
             </div>
 
+            <!-- Databases Tab -->
             <div id="databases" class="tab-content">
                 <div class="artifact-grid">
                     <div class="artifact-section">
                         <h3>Original Artifact</h3>
-                        <a href="#">View Original Code</a>
+                        <a href="YOUR_DATABASES_ORIGINAL_LINK">View Original Code</a>
                     </div>
                     <div class="artifact-section">
                         <h3>Enhanced Version</h3>
-                        <a href="#">View Enhanced Code</a>
+                        <a href="YOUR_DATABASES_ENHANCED_LINK">View Enhanced Code</a>
                     </div>
                 </div>
                 <div class="narrative">
                     <h3>Narrative</h3>
-                    <p>[Your narrative explaining the enhancements, skills demonstrated, and alignment with course outcomes]</p>
+                    <div id="databases-narrative" class="narrative-content">
+                        <p class="load-status">Loading databases narrative...</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
+        // Function to load and render markdown content
+        async function loadNarrative(filename, elementId) {
+            try {
+                const response = await fetch(filename);
+                const text = await response.text();
+                const htmlContent = marked.parse(text);
+                document.getElementById(elementId).innerHTML = htmlContent;
+            } catch (error) {
+                console.error('Error loading narrative:', error);
+                document.getElementById(elementId).innerHTML = 
+                    '<p class="load-status">Error loading content. Please try again later.</p>';
+            }
+        }
+
+        // Modified openTab function
         function openTab(evt, tabName) {
             let tabcontents = document.getElementsByClassName("tab-content");
             for (let i = 0; i < tabcontents.length; i++) {
@@ -270,14 +183,28 @@
 
             document.getElementById(tabName).className += " active";
             evt.currentTarget.className += " active";
+
+            // Load narrative content if not already loaded
+            const narrativeId = `${tabName}-narrative`;
+            const narrativeElement = document.getElementById(narrativeId);
+            if (narrativeElement.querySelector('.load-status')) {
+                loadNarrative(`narratives/${tabName}.md`, narrativeId);
+            }
         }
 
-        // Add click handlers for section headers
+        // Section toggle functionality
         document.querySelectorAll('.section-header').forEach(header => {
             header.addEventListener('click', () => {
                 const content = header.nextElementSibling;
                 content.style.display = content.style.display === 'none' ? 'block' : 'none';
             });
+        });
+
+        // Load initial content
+        document.addEventListener('DOMContentLoaded', () => {
+            loadNarrative('narratives/self-assessment.md', 'self-assessment-content');
+            loadNarrative('narratives/code-review.md', 'code-review-content');
+            loadNarrative('narratives/algorithms.md', 'algorithms-narrative');
         });
     </script>
 </body>
