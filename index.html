@@ -324,6 +324,7 @@
     </div>
 
     <script>
+        // Markdown content loader
         async function loadNarrative(filename, elementId) {
             try {
                 const response = await fetch(`narratives/${filename}.md`);
@@ -338,18 +339,23 @@
             }
         }
 
+        // Section toggler
         function toggleSection(sectionId) {
             const section = document.getElementById(`${sectionId}-section`);
             section.classList.toggle('active');
             
             // Load content if it hasn't been loaded yet
-            const contentElement = document.getElementById(`${sectionId}-content`);
-            if (contentElement.querySelector('.load-status')) {
-                loadNarrative(sectionId, `${sectionId}-content`);
+            if (section.classList.contains('active')) {
+                const contentElement = document.getElementById(`${sectionId}-content`);
+                if (contentElement.querySelector('.load-status')) {
+                    loadNarrative(sectionId, `${sectionId}-content`);
+                }
             }
         }
 
+        // Tab handler
         function openTab(evt, tabName) {
+            // Update tab display
             let tabcontents = document.getElementsByClassName("tab-content");
             for (let i = 0; i < tabcontents.length; i++) {
                 tabcontents[i].className = tabcontents[i].className.replace(" active", "");
@@ -371,15 +377,16 @@
             }
         }
 
-        // Load initial content
+        // Initialize page
         document.addEventListener('DOMContentLoaded', () => {
-            // Show first section by default
-            document.getElementById('self-assessment-section').classList.add('active');
-            
-            // Load initial content
-            loadNarrative('self-assessment', 'self-assessment-content');
-            loadNarrative('code-review', 'code-review-content');
+            // Load all narratives
             loadNarrative('algorithms', 'algorithms-narrative');
+            loadNarrative('software-design', 'software-design-narrative');
+            loadNarrative('databases', 'databases-narrative');
+            
+            // Show first tab content
+            document.getElementById('algorithms').classList.add('active');
+            document.querySelector('.tab-button').classList.add('active');
         });
     </script>
 </body>
