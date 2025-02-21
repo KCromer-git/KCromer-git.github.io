@@ -204,7 +204,7 @@
     <div class="tabs">
       <div class="tab-buttons">
         <button class="tab-button active" onclick="openTab(event, 'algorithms')">Algorithms</button>
-        <button class="tab-button" onclick="console.log('Software Design clicked'); openTab(event, 'software-design');">Software Design</button>
+        <button class="tab-button" onclick="console.log('Software Design button clicked'); openTab(event, 'software-design')">Software Design</button>
         <button class="tab-button" onclick="openTab(event, 'databases')">Databases</button>
       </div>
 
@@ -301,6 +301,8 @@
 
     // Switch tabs (Algorithms, Software Design, Databases)
     function openTab(evt, tabName) {
+      console.log('openTab called with tabName =', tabName);
+
       // Hide all tab contents
       const tabcontents = document.getElementsByClassName('tab-content');
       for (let i = 0; i < tabcontents.length; i++) {
@@ -320,6 +322,7 @@
       // Re-load the correct .md file for that tab
       const mdFile = tabName + '.md';               // e.g. 'algorithms.md'
       const narrativeId = tabName + '-narrative';    // e.g. 'algorithms-narrative'
+      console.log(`Fetching '${mdFile}' -> #${narrativeId}`);
       loadMarkdown(mdFile, narrativeId);
     }
   </script>
