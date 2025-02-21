@@ -310,14 +310,29 @@
     </div>
 
     <script>
-        // Content storage - using your existing narratives
-        const NARRATIVES = {
-            'software-design': `[Your software design narrative content]`,
-            'algorithms': `[Your algorithms narrative content]`,
-            'databases': `[Your databases narrative content]`,
-            'self-assessment': `[Your self-assessment content will go here]`,
-            'code-review': `[Your code review content will go here]`
-        };
+     // Content storage
+const NARRATIVES = {
+    'algorithms': `# Algorithms Enhancement Narrative
+
+## Artifact Selection and Overview
+
+The Contact Management System, originally developed in CS 320, has undergone significant enhancements to showcase advanced data structures and algorithms implementation...`,  // Your full algorithms.md content
+
+    'software-design': `# Software Design Enhancement Narrative
+
+## Artifact Selection and Overview
+
+The artifact enhanced was the GTC Movies Android application, originally developed for CS 360...`,  // Your full software-design.md content
+
+    'databases': `# Database Enhancement Narrative
+
+## Artifact Selection and Overview
+
+For my database enhancement, I chose to improve a combination of CRUD operations module...`,  // Your full databases.md content
+
+    'self-assessment': `[Your self-assessment content will go here]`,
+    'code-review': `[Your code review content will go here]`
+};
 
         // Content loader with debugging
         function loadNarrative(filename, elementId) {
