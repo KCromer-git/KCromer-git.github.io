@@ -65,7 +65,7 @@ The enhancements demonstrate proficiency in multiple areas:
 - Understanding of time complexity
 - Appropriate application of data structures
 
-### Software-Design
+### Software Design Overview
 - Industry-standard design patterns
 - Proper error handling
 - Maintainable and testable code
