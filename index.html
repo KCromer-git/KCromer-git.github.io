@@ -1,178 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CS 499 ePortfolio</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
-    <style>
-        :root {
-            --bg0-hard: #1d2021;
-            --bg0: #282828;
-            --bg1: #3c3836;
-            --bg3: #504945;
-            --fg0: #fbf1c7;
-            --fg1: #ebdbb2;
-            --fg2: #d5c4a1;
-            --aqua: #8ec07c;
-            --dark-aqua: #689d6a;
-            --blue: #458588;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CS 499 ePortfolio</title>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <!-- Marked for Markdown Parsing -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
 
-        body {
-            font-family: system-ui, sans-serif;
-            background-color: var(--bg0-hard);
-            color: var(--fg1);
-            padding: 2rem;
-        }
+  <style>
+    /* --- Basic Gruvbox-like styling --- */
+    :root {
+      --bg0-hard: #1d2021;
+      --bg0: #282828;
+      --bg1: #3c3836;
+      --bg3: #504945;
+      --fg0: #fbf1c7;
+      --fg1: #ebdbb2;
+      --fg2: #d5c4a1;
+      --blue: #458588;
+      --dark-aqua: #689d6a;
+    }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        h1 {
-            color: var(--blue);
-            text-align: center;
-            margin-bottom: 2rem;
-            font-size: 2.5rem;
-        }
+    body {
+      font-family: system-ui, sans-serif;
+      background-color: var(--bg0-hard);
+      color: var(--fg1);
+      padding: 2rem;
+    }
 
-        .tab-buttons {
-            display: flex;
-            gap: 4px;
-            background-color: var(--bg1);
-            padding: 4px;
-            border-radius: 4px;
-        }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
 
-        .tab-button {
-            flex: 1;
-            background: none;
-            border: none;
-            padding: 0.75rem;
-            color: var(--fg2);
-            cursor: pointer;
-            transition: background-color 0.2s;
-            border-radius: 2px;
-        }
+    h1 {
+      color: var(--blue);
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2.5rem;
+    }
 
-        .tab-button.active {
-            background-color: var(--bg0);
-            color: var(--fg0);
-        }
+    /* --- Tab styling --- */
+    .tab-buttons {
+      display: flex;
+      gap: 6px;
+      background-color: var(--bg1);
+      padding: 4px;
+      border-radius: 4px;
+    }
 
-        .tab-content {
-            display: none;
-            padding: 1.5rem;
-            background-color: var(--bg0);
-            border: 1px solid var(--bg3);
-            border-radius: 4px;
-            margin-top: 0.5rem;
-        }
+    .tab-button {
+      flex: 1;
+      background: none;
+      border: none;
+      padding: 0.75rem;
+      cursor: pointer;
+      color: var(--fg2);
+      border-radius: 3px;
+      transition: background-color 0.2s;
+    }
 
-        .tab-content.active {
-            display: block !important;
-        }
+    .tab-button:hover {
+      background-color: var(--bg0);
+    }
 
-        .narrative-content {
-            padding: 1rem;
-            white-space: pre-wrap;
-            color: var(--fg1);
-        }
-    </style>
+    .tab-button.active {
+      background-color: var(--bg0);
+      color: var(--fg0);
+    }
+
+    .tab-content {
+      display: none;
+      padding: 1rem;
+      background-color: var(--bg0);
+      border: 1px solid var(--bg3);
+      border-radius: 4px;
+      margin-top: 0.5rem;
+    }
+    .tab-content.active {
+      display: block !important;
+    }
+
+    .narrative-content {
+      white-space: pre-wrap;
+      margin-top: 1rem;
+    }
+
+    /* Just making headings in the markdown stand out. */
+    .narrative-content h1,
+    .narrative-content h2,
+    .narrative-content h3 {
+      color: var(--fg0);
+    }
+  </style>
 </head>
+
 <body>
-    <div class="container">
-        <h1>Computer Science ePortfolio</h1>
+  <div class="container">
+    <h1>Computer Science ePortfolio</h1>
 
-        <div class="tab-buttons">
-            <button class="tab-button active" data-tab="algorithms">Algorithms</button>
-            <button class="tab-button" data-tab="software-design">Software Design</button>
-            <button class="tab-button" data-tab="databases">Databases</button>
-        </div>
-
-        <div id="algorithms" class="tab-content active">
-            <h3>Algorithms Enhancement</h3>
-            <div id="algorithms-narrative" class="narrative-content">Loading...</div>
-        </div>
-
-        <div id="software-design" class="tab-content">
-            <h3>Software Design Enhancement</h3>
-            <div id="software-design-narrative" class="narrative-content">Loading...</div>
-        </div>
-
-        <div id="databases" class="tab-content">
-            <h3>Database Enhancement</h3>
-            <div id="databases-narrative" class="narrative-content">Loading...</div>
-        </div>
+    <!-- TAB BUTTONS -->
+    <div class="tab-buttons">
+      <button class="tab-button active" data-tab="algorithms">Algorithms</button>
+      <button class="tab-button" data-tab="software-design">Software Design</button>
+      <button class="tab-button" data-tab="databases">Databases</button>
     </div>
 
-    <script>
-        async function loadMarkdown(filePath, elementId) {
-            console.log(`Fetching markdown file: ${filePath}`);
+    <!-- TAB CONTENT: ALGORITHMS -->
+    <div id="algorithms" class="tab-content active">
+      <h2>Algorithms Enhancement</h2>
+      <div id="algorithms-narrative" class="narrative-content">Loading algorithms.md...</div>
+    </div>
 
-            try {
-                const response = await fetch(filePath);
-                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+    <!-- TAB CONTENT: SOFTWARE DESIGN -->
+    <div id="software-design" class="tab-content">
+      <h2>Software Design Enhancement</h2>
+      <div id="software-design-narrative" class="narrative-content">Loading software-design.md...</div>
+    </div>
 
-                const text = await response.text();
-                const htmlContent = marked.parse(text);
+    <!-- TAB CONTENT: DATABASES -->
+    <div id="databases" class="tab-content">
+      <h2>Database Enhancement</h2>
+      <div id="databases-narrative" class="narrative-content">Loading databases.md...</div>
+    </div>
+  </div>
 
-                console.log(`Loaded content for ${filePath}:`, htmlContent);
-                const element = document.getElementById(elementId);
-
-                if (!element) {
-                    console.error(`Error: Element with ID '${elementId}' not found.`);
-                    return;
-                }
-
-                element.innerHTML = htmlContent;
-                console.log(`Successfully injected content into ${elementId}`);
-            } catch (error) {
-                console.error(`Error loading ${filePath}:`, error);
-                document.getElementById(elementId).innerText = "Error loading content.";
-            }
+  <script>
+    // Loads a local markdown file and injects the parsed HTML into the given element.
+    async function loadMarkdown(filePath, elementId) {
+      console.log(`Attempting to fetch '${filePath}'...`);
+      try {
+        const response = await fetch(filePath);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
+        const markdown = await response.text();
+        // Convert markdown to HTML with 'marked'
+        const html = marked.parse(markdown);
+        document.getElementById(elementId).innerHTML = html;
+        console.log(`Injected content from '${filePath}' into #${elementId}`);
+      } catch (error) {
+        console.error(`Error fetching '${filePath}':`, error);
+        document.getElementById(elementId).textContent = `Failed to load '${filePath}'. Check console.`;
+      }
+    }
 
-        function openTab(evt, tabName) {
-            console.log(`Switching to tab: ${tabName}`);
+    function openTab(event, tabName) {
+      console.log(`Switching to tab: ${tabName}`);
 
-            document.querySelectorAll(".tab-content").forEach(tab => tab.classList.remove("active"));
-            document.querySelectorAll(".tab-button").forEach(button => button.classList.remove("active"));
+      // Hide all other tab contents
+      document.querySelectorAll(".tab-content").forEach(tab => {
+        tab.classList.remove("active");
+      });
 
-            const tabContent = document.getElementById(tabName);
-            if (!tabContent) {
-                console.error(`Tab content for '${tabName}' not found.`);
-                return;
-            }
+      // Deactivate all tab buttons
+      document.querySelectorAll(".tab-button").forEach(btn => {
+        btn.classList.remove("active");
+      });
 
-            tabContent.classList.add("active");
-            evt.currentTarget.classList.add("active");
+      // Show the target tab
+      const activeTabContent = document.getElementById(tabName);
+      if (!activeTabContent) {
+        console.error(`Tab content element #${tabName} not found.`);
+        return;
+      }
+      activeTabContent.classList.add("active");
 
-            loadMarkdown(`${tabName}.md`, `${tabName}-narrative`);
-        }
+      // Mark the clicked button as active
+      event.currentTarget.classList.add("active");
 
-        document.addEventListener("DOMContentLoaded", () => {
-            console.log("Page loaded, initializing event listeners...");
+      // Load the associated Markdown file
+      loadMarkdown(`${tabName}.md`, `${tabName}-narrative`);
+    }
 
-            document.querySelectorAll(".tab-button").forEach(button => {
-                button.addEventListener("click", function (event) {
-                    console.log(`Clicked tab: ${this.textContent.trim()}`);
-                    openTab(event, this.getAttribute("data-tab"));
-                });
-            });
+    // Wait for DOM to be ready, then attach listeners and load initial MD
+    document.addEventListener("DOMContentLoaded", () => {
+      console.log("DOM fully loaded. Attaching tab button listeners...");
 
-            loadMarkdown("algorithms.md", "algorithms-narrative");
-            loadMarkdown("software-design.md", "software-design-narrative");
-            loadMarkdown("databases.md", "databases-narrative");
+      // Attach click listeners to each tab button
+      document.querySelectorAll(".tab-button").forEach(button => {
+        button.addEventListener("click", function(e) {
+          console.log(`Button clicked: ${this.dataset.tab}`);
+          openTab(e, this.dataset.tab);
         });
-    </script>
+      });
+
+      // Initially load each .md file so they're ready
+      loadMarkdown("algorithms.md", "algorithms-narrative");
+      loadMarkdown("software-design.md", "software-design-narrative");
+      loadMarkdown("databases.md", "databases-narrative");
+    });
+  </script>
 </body>
 </html>
