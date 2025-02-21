@@ -5,13 +5,181 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CS 499 ePortfolio</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
-    <!-- Keep your existing styles -->
+    <style>
+        :root {
+            /* Gruvbox Dark Colors */
+            --bg0-hard: #1d2021;
+            --bg0: #282828;
+            --bg1: #3c3836;
+            --bg3: #504945;
+            --fg0: #fbf1c7;
+            --fg1: #ebdbb2;
+            --fg2: #d5c4a1;
+            --green: #98971a;
+            --bright-green: #b8bb26;
+            --aqua: #8ec07c;
+            --dark-aqua: #689d6a;
+            --blue: #458588;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: var(--bg0-hard);
+            color: var(--fg1);
+            line-height: 1.6;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: var(--blue);
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+
+        .tabs {
+            margin-top: 2rem;
+        }
+
+        .tab-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4px;
+            background-color: var(--bg1);
+            padding: 4px;
+            border-radius: 4px;
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            padding: 0.75rem;
+            color: var(--fg2);
+            cursor: pointer;
+            transition: background-color 0.2s;
+            border-radius: 2px;
+        }
+
+        .tab-button:hover {
+            background-color: var(--bg0);
+            color: var(--fg0);
+        }
+
+        .tab-button.active {
+            background-color: var(--bg0);
+            color: var(--fg0);
+        }
+
+        .tab-content {
+            display: none;
+            padding: 1.5rem;
+            background-color: var(--bg0);
+            border: 1px solid var(--bg3);
+            border-radius: 4px;
+            margin-top: 0.5rem;
+        }
+
+        .tab-content.active {
+            display: block !important;
+        }
+
+        .artifact-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .artifact-section h3 {
+            color: var(--fg0);
+            margin-bottom: 0.75rem;
+        }
+
+        a {
+            color: var(--aqua);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: var(--dark-aqua);
+            text-decoration: underline;
+        }
+
+        .narrative {
+            border-top: 1px solid var(--bg3);
+            padding-top: 1.5rem;
+            margin-top: 1.5rem;
+            display: block !important;
+        }
+
+        .narrative-content {
+            padding: 1rem;
+            color: var(--fg1) !important;
+            white-space: pre-wrap;
+            display: block !important;
+        }
+
+        .narrative-content h1,
+        .narrative-content h2, 
+        .narrative-content h3 {
+            color: var(--fg0) !important;
+            margin: 1rem 0;
+            display: block !important;
+        }
+
+        .narrative-content p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: var(--fg1) !important;
+            display: block !important;
+        }
+
+        .narrative-content ul, 
+        .narrative-content ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+            color: var(--fg2) !important;
+            display: block !important;
+        }
+
+        .narrative-content li {
+            color: var(--fg2) !important;
+            margin: 0.5rem 0;
+            display: block !important;
+        }
+
+        .load-status {
+            color: var(--fg2);
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .artifact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            body {
+                padding: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <h1>Computer Science ePortfolio</h1>
 
-        <!-- Keep only the tabs section for testing -->
         <div class="tabs">
             <div class="tab-buttons">
                 <button class="tab-button" onclick="openTab(event, 'algorithms')">Algorithms</button>
@@ -19,7 +187,6 @@
                 <button class="tab-button" onclick="openTab(event, 'databases')">Databases</button>
             </div>
 
-            <!-- Focus on software design tab content -->
             <div id="software-design" class="tab-content active">
                 <div class="artifact-grid">
                     <div class="artifact-section">
@@ -42,44 +209,98 @@
     </div>
 
     <script>
-        // Simplified content storage with just software design
+        // Content storage
         const NARRATIVES = {
             'software-design': `# Software Design Enhancement Narrative
 
 ## Artifact Selection and Overview
 
-The artifact enhanced was the GTC Movies Android application, originally developed for CS 360...`
-            // Rest of your software design narrative content
+The artifact enhanced was the GTC Movies Android application, originally developed for CS 360. The initial version was a basic Android app with a single MainActivity.java file handling all functionality, including SMS permissions and basic UI rendering. While functional, this monolithic approach presented significant limitations in terms of maintainability, scalability, and user experience.
+
+## Rationale for Selection
+
+I selected this artifact because it presented an excellent opportunity to demonstrate the evolution from a basic implementation to a professionally architected Android application. The original implementation had all logic centralized in MainActivity.java, lacked data persistence, provided limited error handling, and implemented no architectural patterns. These limitations made it an ideal candidate for showcasing modern Android development practices and software engineering principles.
+
+## Enhancement Details
+
+### Architecture Implementation
+The enhancement process focused on several key areas of improvement. First, I implemented the MVVM (Model-View-ViewModel) architecture pattern by creating separate components for:
+- Data management
+- Business logic
+- UI presentation
+
+This included:
+- Developing a Movie entity class
+- Implementing a Room database for local storage
+- Creating a MovieViewModel to manage UI state
+- Adding a MovieRepository class for clean data operation abstraction
+
+### Data Persistence
+Data persistence was a crucial enhancement, implemented through Room database integration. This included:
+- Creating a MovieDao for database operations
+- Implementing proper background threading for database access
+- Using the repository pattern for efficient data management
+- Adding sample data initialization for immediate user value
+
+### User Interface Improvements
+User interface improvements were substantial, including:
+- Replacing basic layout with modern Material Design
+- Implementing RecyclerView with custom adapter for movie list display
+- Using ViewBinding for type-safe view access
+- Adding favorites functionality with visual feedback
+- Implementing Snackbar components for system feedback
+
+### Error Handling and Performance
+Error handling saw significant improvements through:
+- Proper SMS permission handling
+- Structured try-catch blocks
+- User-friendly error messages
+- Background thread handling for database operations
+- LiveData implementation for reactive UI updates
+
+## Course Outcomes Alignment
+
+These enhancements demonstrate proficiency across multiple course outcomes:
+- MVVM architecture implementation shows mastery of software engineering principles
+- Room database integration displays database management skills
+- Improved permission handling and error management demonstrate security awareness
+- Use of current Android architecture components shows proficiency with modern development practices
+
+## Implementation Challenges
+
+The enhancement process presented several challenges:
+- Maintaining SMS functionality while refactoring the architecture required careful consideration of Android permissions and lifecycle management
+- Implementing proper background threading for database operations while maintaining responsive UI updates
+- Coordinating database operations and UI updates through LiveData observers and state management
+
+## Conclusion
+
+Through these enhancements, the application has been transformed from a basic implementation to a professionally architected solution that demonstrates modern Android development practices. The improvements in maintainability, scalability, and user experience showcase the value of proper software engineering principles in mobile application development. This enhanced artifact serves as a strong example of my ability to implement professional-grade software solutions using current best practices and architectural patterns.`
         };
 
-        // Simplified content loader
+        // Content loader with debugging
         function loadNarrative(filename, elementId) {
-            console.log('Loading narrative:', filename); // Debug log
+            console.log('Loading narrative:', filename);
             try {
                 const content = NARRATIVES[filename];
                 if (!content) {
                     throw new Error(`Content not found for ${filename}`);
                 }
-                console.log('Content found, parsing markdown...'); // Debug log
+                console.log('Content length:', content.length);
                 const htmlContent = marked.parse(content);
-                document.getElementById(elementId).innerHTML = htmlContent;
-                console.log('Content loaded successfully'); // Debug log
+                console.log('HTML content length:', htmlContent.length);
+                const element = document.getElementById(elementId);
+                console.log('Found element:', !!element, 'Element ID:', elementId);
+                element.innerHTML = htmlContent;
+                console.log('Content loaded successfully');
             } catch (error) {
                 console.error('Error in loadNarrative:', error);
-                document.getElementById(elementId).innerHTML = 
-                    `<p class="load-status">Error loading content. Check console for details.</p>`;
             }
         }
 
-        // Simplified tab handler
-        function openTab(evt, tabName) {
-            console.log('Opening tab:', tabName); // Debug log
-            const narrativeId = `${tabName}-narrative`;
-            loadNarrative(tabName, narrativeId);
-        }
-
-        // Initialize page - just load software design
+        // Initialize page
         document.addEventListener('DOMContentLoaded', () => {
+            console.log('Page loaded, initializing content...');
             loadNarrative('software-design', 'software-design-narrative');
         });
     </script>
