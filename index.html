@@ -48,6 +48,46 @@
             font-size: 2.5rem;
         }
 
+        .section {
+            background-color: var(--bg0);
+            border: 1px solid var(--bg3);
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .section-header {
+            background-color: var(--bg1);
+            padding: 1rem;
+            cursor: pointer;
+            border-bottom: 1px solid var(--bg3);
+        }
+
+        .section-header h2 {
+            color: var(--fg0);
+            font-size: 1.25rem;
+        }
+
+        .section-content {
+            padding: 1.5rem;
+            display: none;
+        }
+
+        .section-content.active {
+            display: block !important;
+        }
+
+        .section-content ul {
+            list-style-position: inside;
+            margin: 1rem 0;
+        }
+
+        .section-content li {
+            color: var(--fg2);
+            margin: 0.5rem 0;
+            padding-left: 1rem;
+        }
+
         .tabs {
             margin-top: 2rem;
         }
@@ -180,14 +220,56 @@
     <div class="container">
         <h1>Computer Science ePortfolio</h1>
 
+        <div class="section">
+            <div class="section-header" onclick="toggleSection('self-assessment')">
+                <h2>Professional Self-Assessment</h2>
+            </div>
+            <div id="self-assessment-section" class="section-content">
+                <div id="self-assessment-content" class="narrative-content">
+                    <p class="load-status">Loading self-assessment...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header" onclick="toggleSection('code-review')">
+                <h2>Code Review</h2>
+            </div>
+            <div id="code-review-section" class="section-content">
+                <a href="#">View Code Review Video</a>
+                <div id="code-review-content" class="narrative-content">
+                    <p class="load-status">Loading code review description...</p>
+                </div>
+            </div>
+        </div>
+
         <div class="tabs">
             <div class="tab-buttons">
-                <button class="tab-button" onclick="openTab(event, 'algorithms')">Algorithms</button>
-                <button class="tab-button active" onclick="openTab(event, 'software-design')">Software Design</button>
+                <button class="tab-button active" onclick="openTab(event, 'algorithms')">Algorithms</button>
+                <button class="tab-button" onclick="openTab(event, 'software-design')">Software Design</button>
                 <button class="tab-button" onclick="openTab(event, 'databases')">Databases</button>
             </div>
 
-            <div id="software-design" class="tab-content active">
+            <div id="algorithms" class="tab-content active">
+                <div class="artifact-grid">
+                    <div class="artifact-section">
+                        <h3>Original Artifact</h3>
+                        <a href="https://github.com/KCromer-git/ArtifactFiles/tree/main/CS-320">View Original Code</a>
+                    </div>
+                    <div class="artifact-section">
+                        <h3>Enhanced Version</h3>
+                        <a href="https://github.com/KCromer-git/EnhancedArtifactFiles/tree/main/CS-320">View Enhanced Code</a>
+                    </div>
+                </div>
+                <div class="narrative">
+                    <h3>Narrative</h3>
+                    <div id="algorithms-narrative" class="narrative-content">
+                        <p class="load-status">Loading algorithms narrative...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="software-design" class="tab-content">
                 <div class="artifact-grid">
                     <div class="artifact-section">
                         <h3>Original Artifact</h3>
@@ -205,77 +287,36 @@
                     </div>
                 </div>
             </div>
+
+            <div id="databases" class="tab-content">
+                <div class="artifact-grid">
+                    <div class="artifact-section">
+                        <h3>Original Artifact</h3>
+                        <a href="https://github.com/KCromer-git/ArtifactFiles/tree/main/cs%20340">View Original Code</a>
+                    </div>
+                    <div class="artifact-section">
+                        <h3>Enhanced Version</h3>
+                        <a href="https://github.com/KCromer-git/EnhancedArtifactFiles/tree/main/cs%20340">View Enhanced Code</a>
+                    </div>
+                </div>
+                <div class="narrative">
+                    <h3>Narrative</h3>
+                    <div id="databases-narrative" class="narrative-content">
+                        <p class="load-status">Loading databases narrative...</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        // Content storage
+        // Content storage - using your existing narratives
         const NARRATIVES = {
-            'software-design': `# Software Design Enhancement Narrative
-
-## Artifact Selection and Overview
-
-The artifact enhanced was the GTC Movies Android application, originally developed for CS 360. The initial version was a basic Android app with a single MainActivity.java file handling all functionality, including SMS permissions and basic UI rendering. While functional, this monolithic approach presented significant limitations in terms of maintainability, scalability, and user experience.
-
-## Rationale for Selection
-
-I selected this artifact because it presented an excellent opportunity to demonstrate the evolution from a basic implementation to a professionally architected Android application. The original implementation had all logic centralized in MainActivity.java, lacked data persistence, provided limited error handling, and implemented no architectural patterns. These limitations made it an ideal candidate for showcasing modern Android development practices and software engineering principles.
-
-## Enhancement Details
-
-### Architecture Implementation
-The enhancement process focused on several key areas of improvement. First, I implemented the MVVM (Model-View-ViewModel) architecture pattern by creating separate components for:
-- Data management
-- Business logic
-- UI presentation
-
-This included:
-- Developing a Movie entity class
-- Implementing a Room database for local storage
-- Creating a MovieViewModel to manage UI state
-- Adding a MovieRepository class for clean data operation abstraction
-
-### Data Persistence
-Data persistence was a crucial enhancement, implemented through Room database integration. This included:
-- Creating a MovieDao for database operations
-- Implementing proper background threading for database access
-- Using the repository pattern for efficient data management
-- Adding sample data initialization for immediate user value
-
-### User Interface Improvements
-User interface improvements were substantial, including:
-- Replacing basic layout with modern Material Design
-- Implementing RecyclerView with custom adapter for movie list display
-- Using ViewBinding for type-safe view access
-- Adding favorites functionality with visual feedback
-- Implementing Snackbar components for system feedback
-
-### Error Handling and Performance
-Error handling saw significant improvements through:
-- Proper SMS permission handling
-- Structured try-catch blocks
-- User-friendly error messages
-- Background thread handling for database operations
-- LiveData implementation for reactive UI updates
-
-## Course Outcomes Alignment
-
-These enhancements demonstrate proficiency across multiple course outcomes:
-- MVVM architecture implementation shows mastery of software engineering principles
-- Room database integration displays database management skills
-- Improved permission handling and error management demonstrate security awareness
-- Use of current Android architecture components shows proficiency with modern development practices
-
-## Implementation Challenges
-
-The enhancement process presented several challenges:
-- Maintaining SMS functionality while refactoring the architecture required careful consideration of Android permissions and lifecycle management
-- Implementing proper background threading for database operations while maintaining responsive UI updates
-- Coordinating database operations and UI updates through LiveData observers and state management
-
-## Conclusion
-
-Through these enhancements, the application has been transformed from a basic implementation to a professionally architected solution that demonstrates modern Android development practices. The improvements in maintainability, scalability, and user experience showcase the value of proper software engineering principles in mobile application development. This enhanced artifact serves as a strong example of my ability to implement professional-grade software solutions using current best practices and architectural patterns.`
+            'software-design': `[Your software design narrative content]`,
+            'algorithms': `[Your algorithms narrative content]`,
+            'databases': `[Your databases narrative content]`,
+            'self-assessment': `[Your self-assessment content will go here]`,
+            'code-review': `[Your code review content will go here]`
         };
 
         // Content loader with debugging
@@ -298,10 +339,51 @@ Through these enhancements, the application has been transformed from a basic im
             }
         }
 
+        // Section toggler
+        function toggleSection(sectionId) {
+            const section = document.getElementById(`${sectionId}-section`);
+            section.classList.toggle('active');
+            
+            // Load content when section is opened
+            if (section.classList.contains('active')) {
+                const contentElement = document.getElementById(`${sectionId}-content`);
+                loadNarrative(sectionId, `${sectionId}-content`);
+            }
+        }
+
+        // Tab handler
+        function openTab(evt, tabName) {
+            console.log('Opening tab:', tabName);
+            
+            // Hide all tabs
+            const tabcontents = document.getElementsByClassName("tab-content");
+            Array.from(tabcontents).forEach(tab => {
+                tab.classList.remove("active");
+            });
+
+            // Deactivate all buttons
+            const tablinks = document.getElementsByClassName("tab-button");
+            Array.from(tablinks).forEach(button => {
+                button.classList.remove("active");
+            });
+
+            // Show selected tab and activate button
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+
+            // Load content
+            const narrativeId = `${tabName}-narrative`;
+            loadNarrative(tabName, narrativeId);
+        }
+
         // Initialize page
         document.addEventListener('DOMContentLoaded', () => {
             console.log('Page loaded, initializing content...');
-            loadNarrative('software-design', 'software-design-narrative');
+            loadNarrative('algorithms', 'algorithms-narrative');
+            
+            // Show first tab content
+            document.getElementById('algorithms').classList.add('active');
+            document.querySelector('.tab-button').classList.add('active');
         });
     </script>
 </body>
