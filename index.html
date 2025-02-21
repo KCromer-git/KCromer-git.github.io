@@ -310,25 +310,214 @@
     </div>
 
     <script>
-     // Content storage
+    // Content storage
 const NARRATIVES = {
     'algorithms': `# Algorithms Enhancement Narrative
 
 ## Artifact Selection and Overview
 
-The Contact Management System, originally developed in CS 320, has undergone significant enhancements to showcase advanced data structures and algorithms implementation...`,  // Your full algorithms.md content
+The Contact Management System, originally developed in CS 320, has undergone significant enhancements to showcase advanced data structures and algorithms implementation. While the original system offered basic CRUD operations through a HashMap data structure, it was limited in its search capabilities and lacked sophisticated data organization features. The enhanced system now incorporates several key improvements across multiple areas of functionality.
+
+## Data Structure Implementations
+
+The data structure implementations have been substantially upgraded, including:
+
+### Binary Search Tree (BST)
+- Efficient name-based contact searches
+- O(log n) search complexity for name queries
+- Maintains sorted order of contacts by name
+
+### Graph-Based Contact Grouping
+- Implemented using adjacency list structure
+- Enables organization of contacts into logical groups
+- Supports efficient group membership queries
+
+### Enhanced HashMap Implementation
+- Better error handling mechanisms
+- Enhanced validation and data consistency checks
+- Proper object comparison through equals/hashCode implementation
+
+## Algorithm Enhancements
+
+### Search Algorithms
+- Binary search for efficient name lookups
+- Fuzzy search for partial matches
+- Multiple search criteria implementation:
+  - Name-based searching
+  - Phone number searching
+  - Address field searching
+
+### Sorting Capabilities
+- QuickSort implementation
+- MergeSort implementation
+- Comparative performance analysis based on data size
+
+### Graph Operations
+- Implemented graph traversal algorithms
+- Breadth-first search for group management
+- Efficient relationship maintenance algorithms
+
+## Technical Improvements
+
+### Code Quality
+- Improved error handling with specific error messages
+- Enhanced data validation
+- Better encapsulation of internal data structures
+- Comprehensive unit test coverage
+
+### Performance Optimizations
+- O(log n) search complexity for name-based queries
+- Efficient sorting algorithms for different use cases
+- Optimized group operations
+
+## Course Outcomes Alignment
+
+The enhancements demonstrate proficiency in multiple areas:
+
+### Algorithm Implementation
+- Multiple search and sort algorithms
+- Understanding of time complexity
+- Appropriate application of data structures
+
+### Software Design
+- Industry-standard design patterns
+- Proper error handling
+- Maintainable and testable code
+
+## Testing and Validation
+
+### Comprehensive Testing Suite
+- Unit tests for data structure operations
+- Search algorithm accuracy verification
+- Sorting algorithm correctness validation
+- Group management functionality testing
+- Error handling verification
+
+### Key Design Decisions
+- Selected BST over AVL Tree for simplicity while maintaining good average-case performance
+- Implemented multiple search methods to balance flexibility and code complexity
+- Included both QuickSort and MergeSort for performance comparison and learning opportunities
+
+## Future Improvements
+
+Potential enhancements could include:
+- Implementing balanced tree structures (AVL/Red-Black)
+- Adding advanced search algorithms (Trie for autocomplete)
+- Incorporating additional sorting algorithms
+- Enhancing group relationship features
+
+## Conclusion
+
+This enhancement successfully demonstrates the practical application of advanced computer science concepts while maintaining high standards for code quality and testability. The improvements in data structures, algorithms, and overall system architecture showcase both technical proficiency and software engineering best practices.`,
 
     'software-design': `# Software Design Enhancement Narrative
 
 ## Artifact Selection and Overview
 
-The artifact enhanced was the GTC Movies Android application, originally developed for CS 360...`,  // Your full software-design.md content
+The artifact enhanced was the GTC Movies Android application, originally developed for CS 360. The initial version was a basic Android app with a single MainActivity.java file handling all functionality, including SMS permissions and basic UI rendering. While functional, this monolithic approach presented significant limitations in terms of maintainability, scalability, and user experience.
+
+## Rationale for Selection
+
+I selected this artifact because it presented an excellent opportunity to demonstrate the evolution from a basic implementation to a professionally architected Android application. The original implementation had all logic centralized in MainActivity.java, lacked data persistence, provided limited error handling, and implemented no architectural patterns. These limitations made it an ideal candidate for showcasing modern Android development practices and software engineering principles.
+
+## Enhancement Details
+
+### Architecture Implementation
+The enhancement process focused on several key areas of improvement. First, I implemented the MVVM (Model-View-ViewModel) architecture pattern by creating separate components for:
+- Data management
+- Business logic
+- UI presentation
+
+This included:
+- Developing a Movie entity class
+- Implementing a Room database for local storage
+- Creating a MovieViewModel to manage UI state
+- Adding a MovieRepository class for clean data operation abstraction
+
+### Data Persistence
+Data persistence was a crucial enhancement, implemented through Room database integration. This included:
+- Creating a MovieDao for database operations
+- Implementing proper background threading for database access
+- Using the repository pattern for efficient data management
+- Adding sample data initialization for immediate user value
+
+### User Interface Improvements
+User interface improvements were substantial, including:
+- Replacing basic layout with modern Material Design
+- Implementing RecyclerView with custom adapter for movie list display
+- Using ViewBinding for type-safe view access
+- Adding favorites functionality with visual feedback
+- Implementing Snackbar components for system feedback
+
+### Error Handling and Performance
+Error handling saw significant improvements through:
+- Proper SMS permission handling
+- Structured try-catch blocks
+- User-friendly error messages
+- Background thread handling for database operations
+- LiveData implementation for reactive UI updates
+
+## Course Outcomes Alignment
+
+These enhancements demonstrate proficiency across multiple course outcomes:
+- MVVM architecture implementation shows mastery of software engineering principles
+- Room database integration displays database management skills
+- Improved permission handling and error management demonstrate security awareness
+- Use of current Android architecture components shows proficiency with modern development practices
+
+## Implementation Challenges
+
+The enhancement process presented several challenges:
+- Maintaining SMS functionality while refactoring the architecture required careful consideration of Android permissions and lifecycle management
+- Implementing proper background threading for database operations while maintaining responsive UI updates
+- Coordinating database operations and UI updates through LiveData observers and state management
+
+## Conclusion
+
+Through these enhancements, the application has been transformed from a basic implementation to a professionally architected solution that demonstrates modern Android development practices. The improvements in maintainability, scalability, and user experience showcase the value of proper software engineering principles in mobile application development. This enhanced artifact serves as a strong example of my ability to implement professional-grade software solutions using current best practices and architectural patterns.`,
 
     'databases': `# Database Enhancement Narrative
 
 ## Artifact Selection and Overview
 
-For my database enhancement, I chose to improve a combination of CRUD operations module...`,  // Your full databases.md content
+For my database enhancement, I chose to improve a combination of CRUD operations module and data visualization dashboard originally created for an animal shelter system. This artifact, initially developed as part of a database course project, started as a basic implementation with simple MongoDB operations and a rudimentary dashboard. The original version had minimal error handling, basic visualization capabilities, and limited user interaction features, presenting an excellent opportunity for significant enhancement.
+
+## Rationale for Selection
+
+I selected this particular artifact because it encompasses several crucial aspects of modern software development that showcase my growing expertise. The project demonstrates proficiency in database operations through robust CRUD implementation, error handling, and logging systems. It also highlights skills in data visualization through an interactive dashboard with real-time updates and geospatial data representation. Furthermore, the software architecture demonstrates my ability to create modular, maintainable code with clear separation of concerns.
+
+## Enhancement Process
+
+The enhancement process involved several major improvements to the original artifact. In the database operations component, I implemented comprehensive error handling with try-catch blocks and a detailed logging system to track all database operations. I added type hints throughout the code to improve maintainability and prevent potential errors during development. The return values from database operations were enhanced to provide more detailed statistics, and I added support for projections in read operations and aggregation capabilities for complex queries. I also implemented proper connection cleanup through a destructor method to ensure resource management.
+
+## Dashboard Enhancements
+
+The dashboard functionality received significant upgrades as well. I implemented interactive filters for animal type and training status, including specific rescue type filters with breed requirements. For example, the water rescue filter specifically identifies dogs like Labradors, Newfoundlands, and Retrievers that meet age and health requirements for water rescue training. The mountain/wilderness rescue filter focuses on breeds such as German Shepherds, Malamutes, and Huskies, while the disaster response filter identifies suitable breeds like German Shepherds, Dobermans, and Golden Retrievers. The data table was enhanced with sorting and filtering capabilities, and the layout was made responsive to different screen sizes. The map visualization was improved with interactive tooltips and popups to provide detailed information about each animal's location and status.
+
+## Code Structure and Development Practices
+
+The code structure and organization were completely revamped to follow professional software development practices. I separated the code into distinct modules, each with a specific responsibility, and added comprehensive documentation throughout. The implementation now follows proper Python packaging structure, including a requirements.txt file for dependency management, making it easier for other developers to work with the code.
+
+## Course Outcomes Alignment
+
+These enhancements align well with the course outcomes. The well-documented, modular code supports collaborative environments, while the enhanced dashboard UI demonstrates professional communication through effective data presentation. The optimized database queries and efficient filtering mechanisms show mastery of data structures and algorithms. The comprehensive error handling, logging system, and modular design exemplify software engineering principles. Security considerations are addressed through input validation, proper connection handling, and careful error management to prevent data leaks.
+
+## Implementation Challenges
+
+The enhancement process presented several significant challenges that provided valuable learning opportunities. Implementing complex filtering logic for specific rescue types required careful consideration of breed requirements and age restrictions. I solved this by creating composite filters that could be combined dynamically. Ensuring data consistency across different visualizations while maintaining real-time updates was another challenge that required careful state management and update callbacks. Performance optimization was also crucial, requiring a balance between feature richness and system responsiveness.
+
+## Future Improvements
+
+Looking ahead, there are several potential future improvements that could further enhance the system. These include:
+- Adding more visualization options for trend analysis
+- Implementing advanced search capabilities using text similarity
+- Adding export functionality for filtered data
+- Implementing user authentication and role-based access control
+- Adding real-time data synchronization capabilities
+
+## Conclusion
+
+This enhancement process has significantly improved the original artifact's functionality, maintainability, and user experience. The system now serves as a robust tool for animal shelter management while demonstrating professional software development practices. Through this process, I've gained deeper understanding of database operations, user interface design, and software architecture principles, while creating a more valuable tool for end users.`,
 
     'self-assessment': `[Your self-assessment content will go here]`,
     'code-review': `[Your code review content will go here]`
