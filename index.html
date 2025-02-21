@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CS 499 ePortfolio</title>
 
-  <!-- Marked for Markdown Parsing -->
+  <!-- Marked.js for parsing .md files -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
 
   <style>
-    /* --- Basic Gruvbox-like styling --- */
+    /* Gruvbox Dark Colors */
     :root {
       --bg0-hard: #1d2021;
       --bg0: #282828;
@@ -18,7 +18,9 @@
       --fg0: #fbf1c7;
       --fg1: #ebdbb2;
       --fg2: #d5c4a1;
-      --blue: #458588;
+      --green: #98971a;
+      --bright-green: #b8bb26;
+      --aqua: #8ec07c;
       --dark-aqua: #689d6a;
     }
 
@@ -29,9 +31,10 @@
     }
 
     body {
-      font-family: system-ui, sans-serif;
+      font-family: system-ui, -apple-system, sans-serif;
       background-color: var(--bg0-hard);
       color: var(--fg1);
+      line-height: 1.6;
       padding: 2rem;
     }
 
@@ -41,36 +44,75 @@
     }
 
     h1 {
-      color: var(--blue);
+      color: var(--fg0);
       text-align: center;
       margin-bottom: 2rem;
       font-size: 2.5rem;
     }
 
-    /* --- Tab styling --- */
+    /* SECTION (Self-Assessment, Code Review) */
+    .section {
+      background-color: var(--bg0);
+      border: 1px solid var(--bg3);
+      border-radius: 4px;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+    }
+
+    .section-header {
+      background-color: var(--bg1);
+      padding: 1rem;
+      cursor: pointer;
+      border-bottom: 1px solid var(--bg3);
+    }
+
+    .section-header h2 {
+      color: var(--fg0);
+      font-size: 1.25rem;
+    }
+
+    .section-content {
+      padding: 1.5rem;
+    }
+
+    .section-content ul {
+      list-style-position: inside;
+      margin: 1rem 0;
+    }
+
+    .section-content li {
+      color: var(--fg2);
+      margin: 0.5rem 0;
+      padding-left: 1rem;
+    }
+
+    /* TABS for Artifacts */
+    .tabs {
+      margin-top: 2rem;
+    }
+
     .tab-buttons {
-      display: flex;
-      gap: 6px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
       background-color: var(--bg1);
       padding: 4px;
       border-radius: 4px;
     }
 
     .tab-button {
-      flex: 1;
       background: none;
       border: none;
       padding: 0.75rem;
-      cursor: pointer;
       color: var(--fg2);
-      border-radius: 3px;
+      cursor: pointer;
       transition: background-color 0.2s;
+      border-radius: 2px;
     }
-
     .tab-button:hover {
       background-color: var(--bg0);
+      color: var(--fg0);
     }
-
     .tab-button.active {
       background-color: var(--bg0);
       color: var(--fg0);
@@ -78,125 +120,208 @@
 
     .tab-content {
       display: none;
-      padding: 1rem;
+      padding: 1.5rem;
       background-color: var(--bg0);
       border: 1px solid var(--bg3);
       border-radius: 4px;
       margin-top: 0.5rem;
     }
     .tab-content.active {
-      display: block !important;
+      display: block;
     }
 
-    .narrative-content {
-      white-space: pre-wrap;
-      margin-top: 1rem;
+    /* Artifact Grid */
+    .artifact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
     }
 
-    /* Just making headings in the markdown stand out. */
-    .narrative-content h1,
-    .narrative-content h2,
-    .narrative-content h3 {
+    .artifact-section h3 {
       color: var(--fg0);
+      margin-bottom: 0.75rem;
+    }
+
+    a {
+      color: var(--aqua);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    a:hover {
+      color: var(--dark-aqua);
+      text-decoration: underline;
+    }
+
+    .narrative {
+      border-top: 1px solid var(--bg3);
+      padding-top: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .artifact-grid {
+        grid-template-columns: 1fr;
+      }
+      body {
+        padding: 1rem;
+      }
     }
   </style>
 </head>
-
 <body>
   <div class="container">
     <h1>Computer Science ePortfolio</h1>
 
-    <!-- TAB BUTTONS -->
-    <div class="tab-buttons">
-      <button class="tab-button active" data-tab="algorithms">Algorithms</button>
-      <button class="tab-button" data-tab="software-design">Software Design</button>
-      <button class="tab-button" data-tab="databases">Databases</button>
+    <!-- ===== SECTION: Professional Self-Assessment ===== -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Professional Self-Assessment</h2>
+      </div>
+      <div class="section-content" style="display:block;">
+        <p>[Replace this text with your thorough self-assessment, e.g.:</p>
+        <ul>
+          <li>Your professional goals & journey in CS</li>
+          <li>Key strengths/skills developed</li>
+          <li>How artifacts demonstrate your capabilities</li>
+          <li>Growth in collaboration, security, software design, etc.</li>
+        </ul>
+      </div>
     </div>
 
-    <!-- TAB CONTENT: ALGORITHMS -->
-    <div id="algorithms" class="tab-content active">
-      <h2>Algorithms Enhancement</h2>
-      <div id="algorithms-narrative" class="narrative-content">Loading algorithms.md...</div>
+    <!-- ===== SECTION: Code Review ===== -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Code Review</h2>
+      </div>
+      <div class="section-content" style="display:block;">
+        <a href="#">View Code Review Video</a>
+        <p>A thorough review analyzing code structure, security, functionality, and potential improvements.</p>
+      </div>
     </div>
 
-    <!-- TAB CONTENT: SOFTWARE DESIGN -->
-    <div id="software-design" class="tab-content">
-      <h2>Software Design Enhancement</h2>
-      <div id="software-design-narrative" class="narrative-content">Loading software-design.md...</div>
-    </div>
+    <!-- ===== TABS for Artifacts ===== -->
+    <div class="tabs">
+      <div class="tab-buttons">
+        <button class="tab-button active" onclick="openTab(event, 'algorithms')">Algorithms</button>
+        <button class="tab-button" onclick="openTab(event, 'software-design')">Software Design</button>
+        <button class="tab-button" onclick="openTab(event, 'databases')">Databases</button>
+      </div>
 
-    <!-- TAB CONTENT: DATABASES -->
-    <div id="databases" class="tab-content">
-      <h2>Database Enhancement</h2>
-      <div id="databases-narrative" class="narrative-content">Loading databases.md...</div>
+      <!-- ALGORITHMS TAB -->
+      <div id="algorithms" class="tab-content active">
+        <div class="artifact-grid">
+          <div class="artifact-section">
+            <h3>Original Artifact</h3>
+            <!-- Replace with your GitHub link or other code URL -->
+            <a href="#">View Original Code</a>
+          </div>
+          <div class="artifact-section">
+            <h3>Enhanced Version</h3>
+            <a href="#">View Enhanced Code</a>
+          </div>
+        </div>
+        <div class="narrative">
+          <h3>Narrative</h3>
+          <!-- loads algorithms.md here -->
+          <div id="algorithms-narrative">Loading algorithms.md...</div>
+        </div>
+      </div>
+
+      <!-- SOFTWARE DESIGN TAB -->
+      <div id="software-design" class="tab-content">
+        <div class="artifact-grid">
+          <div class="artifact-section">
+            <h3>Original Artifact</h3>
+            <a href="#">View Original Code</a>
+          </div>
+          <div class="artifact-section">
+            <h3>Enhanced Version</h3>
+            <a href="#">View Enhanced Code</a>
+          </div>
+        </div>
+        <div class="narrative">
+          <h3>Narrative</h3>
+          <!-- loads software-design.md here -->
+          <div id="software-design-narrative">Loading software-design.md...</div>
+        </div>
+      </div>
+
+      <!-- DATABASES TAB -->
+      <div id="databases" class="tab-content">
+        <div class="artifact-grid">
+          <div class="artifact-section">
+            <h3>Original Artifact</h3>
+            <a href="#">View Original Code</a>
+          </div>
+          <div class="artifact-section">
+            <h3>Enhanced Version</h3>
+            <a href="#">View Enhanced Code</a>
+          </div>
+        </div>
+        <div class="narrative">
+          <h3>Narrative</h3>
+          <!-- loads databases.md here -->
+          <div id="databases-narrative">Loading databases.md...</div>
+        </div>
+      </div>
     </div>
   </div>
 
   <script>
-    // Loads a local markdown file and injects the parsed HTML into the given element.
+    // Expand/collapse the two sections (Self-Assessment & Code Review)
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.section-header').forEach(header => {
+        header.addEventListener('click', () => {
+          const content = header.nextElementSibling;
+          content.style.display = (content.style.display === 'none') ? 'block' : 'none';
+        });
+      });
+
+      // Pre-load the 3 .md files so they're ready right away
+      loadMarkdown('algorithms.md', 'algorithms-narrative');
+      loadMarkdown('software-design.md', 'software-design-narrative');
+      loadMarkdown('databases.md', 'databases-narrative');
+    });
+
+    // Load .md file into the correct narrative div
     async function loadMarkdown(filePath, elementId) {
-      console.log(`Attempting to fetch '${filePath}'...`);
       try {
         const response = await fetch(filePath);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const markdown = await response.text();
-        // Convert markdown to HTML with 'marked'
-        const html = marked.parse(markdown);
-        document.getElementById(elementId).innerHTML = html;
-        console.log(`Injected content from '${filePath}' into #${elementId}`);
-      } catch (error) {
-        console.error(`Error fetching '${filePath}':`, error);
+        document.getElementById(elementId).innerHTML = marked.parse(markdown);
+      } catch (err) {
+        console.error(`Error fetching '${filePath}':`, err);
         document.getElementById(elementId).textContent = `Failed to load '${filePath}'. Check console.`;
       }
     }
 
-    function openTab(event, tabName) {
-      console.log(`Switching to tab: ${tabName}`);
-
-      // Hide all other tab contents
-      document.querySelectorAll(".tab-content").forEach(tab => {
-        tab.classList.remove("active");
-      });
+    // Switch tabs (Algorithms, Software Design, Databases)
+    function openTab(evt, tabName) {
+      // Hide all tab contents
+      const tabcontents = document.getElementsByClassName('tab-content');
+      for (let i = 0; i < tabcontents.length; i++) {
+        tabcontents[i].classList.remove('active');
+      }
 
       // Deactivate all tab buttons
-      document.querySelectorAll(".tab-button").forEach(btn => {
-        btn.classList.remove("active");
-      });
-
-      // Show the target tab
-      const activeTabContent = document.getElementById(tabName);
-      if (!activeTabContent) {
-        console.error(`Tab content element #${tabName} not found.`);
-        return;
+      const tablinks = document.getElementsByClassName('tab-button');
+      for (let i = 0; i < tablinks.length; i++) {
+        tablinks[i].classList.remove('active');
       }
-      activeTabContent.classList.add("active");
 
-      // Mark the clicked button as active
-      event.currentTarget.classList.add("active");
+      // Show the chosen tab
+      document.getElementById(tabName).classList.add('active');
+      evt.currentTarget.classList.add('active');
 
-      // Load the associated Markdown file
-      loadMarkdown(`${tabName}.md`, `${tabName}-narrative`);
+      // Re-load the correct .md file for that tab
+      const mdFile = tabName + '.md';               // e.g. 'algorithms.md'
+      const narrativeId = tabName + '-narrative';    // e.g. 'algorithms-narrative'
+      loadMarkdown(mdFile, narrativeId);
     }
-
-    // Wait for DOM to be ready, then attach listeners and load initial MD
-    document.addEventListener("DOMContentLoaded", () => {
-      console.log("DOM fully loaded. Attaching tab button listeners...");
-
-      // Attach click listeners to each tab button
-      document.querySelectorAll(".tab-button").forEach(button => {
-        button.addEventListener("click", function(e) {
-          console.log(`Button clicked: ${this.dataset.tab}`);
-          openTab(e, this.dataset.tab);
-        });
-      });
-
-      // Initially load each .md file so they're ready
-      loadMarkdown("algorithms.md", "algorithms-narrative");
-      loadMarkdown("software-design.md", "software-design-narrative");
-      loadMarkdown("databases.md", "databases-narrative");
-    });
   </script>
 </body>
 </html>
